@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kashif Imran | Portfolio</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #3498db;
+            --secondary: #9b59b6;
+            --dark: #2c3e50;
+            --light: #ecf0f1;
+            --accent: #e74c3c;
+            --main-bg: #f8f9fa;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background: var(--main-bg);
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        .navbar {
+            background: rgba(44, 62, 80, 0.9);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            width: 90%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 20px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 15px 0;
+            display: block;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 12px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Portfolio Section */
+        .portfolio-section {
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--dark);
+            margin-bottom: 40px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: var(--primary);
+            border-radius: 2px;
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            margin: 50px auto;
+            max-width: 1400px;
+            padding: 0 20px;
+        }
+
+        .portfolio-item {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            background: white;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .portfolio-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .portfolio-img-container {
+            width: 100%;
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f5f5f5;
+            min-height: 250px;
+            overflow: hidden;
+        }
+
+        .portfolio-img {
+            width: 100%;
+            height: auto;
+            max-height: 300px;
+            object-fit: contain;
+            display: block;
+            transition: transform 0.5s ease;
+            padding: 20px;
+        }
+
+        .portfolio-item:hover .portfolio-img {
+            transform: scale(1.05);
+        }
+
+        .portfolio-content {
+            padding: 25px;
+            text-align: left;
+        }
+
+        .portfolio-content h3 {
+            font-size: 1.4rem;
+            margin-bottom: 12px;
+            color: var(--dark);
+        }
+
+        .portfolio-content p {
+            color: #666;
+            margin-bottom: 18px;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .portfolio-category {
+            display: inline-block;
+            background: rgba(52, 152, 219, 0.1);
+            color: var(--primary);
+            padding: 8px 16px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        /* Lightbox Styles */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.97);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lightbox.active {
+            display: flex;
+        }
+
+        .lightbox-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90vh;
+            text-align: center;
+        }
+
+        .lightbox-img {
+            max-width: 100%;
+            max-height: 80vh;
+            border-radius: 8px;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.7);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: -50px;
+            right: -15px;
+            color: white;
+            font-size: 35px;
+            cursor: pointer;
+            transition: 0.3s;
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lightbox-close:hover {
+            color: var(--primary);
+            background: rgba(0, 0, 0, 0.9);
+        }
+
+        .lightbox-caption {
+            color: white;
+            text-align: center;
+            margin-top: 25px;
+            padding: 0 30px;
+            max-width: 800px;
+        }
+
+        .lightbox-caption h3 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+
+        .lightbox-caption p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            line-height: 1.7;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--dark);
+            color: rgba(255, 255, 255, 0.85);
+            padding: 40px 0;
+            text-align: center;
+            margin-top: 80px;
+        }
+
+        .copyright {
+            font-size: 1rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .portfolio-grid {
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+                gap: 25px;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .portfolio-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .section-title {
+                font-size: 2.2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+                max-width: 600px;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .nav-container {
+                flex-direction: column;
+                padding: 15px 0;
+            }
+
+            .nav-links {
+                margin-top: 15px;
+                width: 100%;
+                justify-content: space-around;
+            }
+
+            .nav-links li {
+                margin-left: 0;
+            }
+
+            .portfolio-img-container {
+                min-height: 220px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .lightbox-caption h3 {
+                font-size: 1.4rem;
+            }
+
+            .lightbox-caption p {
+                font-size: 1rem;
+            }
+
+            .portfolio-content {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <a href="index.html" style="color: white; font-weight: 700;">Kashif Imran</a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="portfolio.html">Portfolio</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="certificates.html">Certificates</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Portfolio Section -->
+    <section class="portfolio-section">
+        <div class="container">
+            <h2 class="section-title">My Portfolio</h2>
+            
+            <div class="portfolio-grid">
+                <!-- Item 1 -->
+                <div class="portfolio-item">
+                    <div class="portfolio-img-container">
+                        <img src="Images/Project_1.png" 
+                             alt="Kellogg's Exhibition Stand" 
+                             class="portfolio-img"
+                             data-title="Kellogg's Exhibition"
+                             data-desc="3D exhibition stand design for Kellogg's products">
+                    </div>
+                    <div class="portfolio-content">
+                        <h3>Kellogg's Exhibition</h3>
+                        <p>3D exhibition stand design for Kellogg's products featuring interactive elements and brand-specific color schemes.</p>
+                        <span class="portfolio-category">3D Modeling</span>
+                    </div>
+                </div>
+                
+                <!-- Item 2 -->
+                <div class="portfolio-item">
+                    <div class="portfolio-img-container">
+                        <img src="https://images.unsplash.com/photo-1593508512255-86ab42a8e620?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1178&q=80" 
+                             alt="Al Areesh Stand" 
+                             class="portfolio-img"
+                             data-title="Al Areesh Stand"
+                             data-desc="Interactive exhibition stand with brand elements">
+                    </div>
+                    <div class="portfolio-content">
+                        <h3>Al Areesh Stand</h3>
+                        <p>Interactive exhibition stand with brand elements and digital integration for enhanced visitor engagement.</p>
+                        <span class="portfolio-category">3D Design</span>
+                    </div>
+                </div>
+                
+                <!-- Item 3 -->
+                <div class="portfolio-item">
+                    <div class="portfolio-img-container">
+                        <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1064&q=80" 
+                             alt="Media Free Zone" 
+                             class="portfolio-img"
+                             data-title="Media Free Zone"
+                             data-desc="Tech-integrated exhibition stand design">
+                    </div>
+                    <div class="portfolio-content">
+                        <h3>Media Free Zone</h3>
+                        <p>Tech-integrated exhibition stand design featuring LED walls and interactive touch screens.</p>
+                        <span class="portfolio-category">3D Visualization</span>
+                    </div>
+                </div>
+                
+                <!-- Item 4 -->
+                <div class="portfolio-item">
+                    <div class="portfolio-img-container">
+                        <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80" 
+                             alt="Bahlsen Display" 
+                             class="portfolio-img"
+                             data-title="Bahlsen Display"
+                             data-desc="Food product exhibition with storytelling">
+                    </div>
+                    <div class="portfolio-content">
+                        <h3>Bahlsen Display</h3>
+                        <p>Food product exhibition with storytelling elements and product sampling stations.</p>
+                        <span class="portfolio-category">3D Modeling</span>
+                    </div>
+                </div>
+                
+                <!-- Item 5 -->
+                <div class="portfolio-item">
+                    <div class="portfolio-img-container">
+                        <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80" 
+                             alt="Product Packaging" 
+                             class="portfolio-img"
+                             data-title="Product Packaging"
+                             data-desc="Eye-catching retail packaging design">
+                    </div>
+                    <div class="portfolio-content">
+                        <h3>Product Packaging</h3>
+                        <p>Eye-catching retail packaging design with sustainable materials and innovative opening mechanisms.</p>
+                        <span class="portfolio-category">Graphic Design</span>
+                    </div>
+                </div>
+                
+                <!-- Item 6 -->
+                <div class="portfolio-item">
+                    <div class="portfolio-img-container">
+                        <img src="https://images.unsplash.com/photo-1593508512255-86ab42a8e620?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1178&q=80" 
+                             alt="Corporate Branding" 
+                             class="portfolio-img"
+                             data-title="Corporate Branding"
+                             data-desc="Complete visual identity package">
+                    </div>
+                    <div class="portfolio-content">
+                        <h3>Corporate Branding</h3>
+                        <p>Complete visual identity package including logo, business cards, and brand guidelines.</p>
+                        <span class="portfolio-category">Brand Identity</span>
+                    </div>
+                </div>
+
+                <!-- Item 7 -->
+                <div class="portfolio-item">
+                    <div class="portfolio-img-container">
+                        <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" 
+                             alt="Retail Store Design" 
+                             class="portfolio-img"
+                             data-title="Retail Store Design"
+                             data-desc="Modern retail space layout and design">
+                    </div>
+                    <div class="portfolio-content">
+                        <h3>Retail Store Design</h3>
+                        <p>Modern retail space layout focusing on customer flow and product visibility.</p>
+                        <span class="portfolio-category">Interior Design</span>
+                    </div>
+                </div>
+
+                <!-- Item 8 -->
+                <div class="portfolio-item">
+                    <div class="portfolio-img-container">
+                        <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" 
+                             alt="Trade Show Booth" 
+                             class="portfolio-img"
+                             data-title="Trade Show Booth"
+                             data-desc="Modular exhibition booth design">
+                    </div>
+                    <div class="portfolio-content">
+                        <h3>Trade Show Booth</h3>
+                        <p>Modular exhibition booth design with reconfigurable components for multiple events.</p>
+                        <span class="portfolio-category">3D Design</span>
+                    </div>
+                </div>
+
+                <!-- Item 9 -->
+                <div class="portfolio-item">
+                    <div class="portfolio-img-container">
+                        <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" 
+                             alt="Museum Display" 
+                             class="portfolio-img"
+                             data-title="Museum Display"
+                             data-desc="Interactive museum exhibition design">
+                    </div>
+                    <div class="portfolio-content">
+                        <h3>Museum Display</h3>
+                        <p>Interactive museum exhibition design with tactile elements and augmented reality features.</p>
+                        <span class="portfolio-category">Exhibition Design</span>
+                    </div>
+                </div>
+
+                <!-- Item 10 -->
+                <div class="portfolio-item">
+                    <div class="portfolio-img-container">
+                        <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" 
+                             alt="Event Stage Design" 
+                             class="portfolio-img"
+                             data-title="Event Stage Design"
+                             data-desc="Large-scale event stage with lighting effects">
+                    </div>
+                    <div class="portfolio-content">
+                        <h3>Event Stage Design</h3>
+                        <p>Large-scale event stage with dynamic lighting effects and projection mapping capabilities.</p>
+                        <span class="portfolio-category">Stage Design</span>
+                    </div>
+                </div>
+
+                <!-- Item 11 -->
+                <div class="portfolio-item">
+                    <div class="portfolio-img-container">
+                        <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" 
+                             alt="POP Display" 
+                             class="portfolio-img"
+                             data-title="POP Display"
+                             data-desc="Point-of-purchase retail display">
+                    </div>
+                    <div class="portfolio-content">
+                        <h3>POP Display</h3>
+                        <p>Point-of-purchase retail display with integrated digital signage.</p>
+                        <span class="portfolio-category">Retail Design</span>
+                    </div>
+                </div>
+
+                <!-- Item 12 -->
+                <div class="portfolio-item">
+                    <div class="portfolio-img-container">
+                        <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" 
+                             alt="Concept Store" 
+                             class="portfolio-img"
+                             data-title="Concept Store"
+                             data-desc="Innovative retail concept store design">
+                    </div>
+                    <div class="portfolio-content">
+                        <h3>Concept Store</h3>
+                        <p>Innovative retail concept store blending physical and digital shopping experiences.</p>
+                        <span class="portfolio-category">Retail Design</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+        <div class="lightbox-content">
+            <span class="lightbox-close" aria-label="Close lightbox">&times;</span>
+            <img class="lightbox-img" src="" alt="">
+            <div class="lightbox-caption">
+                <h3 class="caption-title"></h3>
+                <p class="caption-desc"></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="copyright">
+                <p>© <span id="year"></span> Kashif Imran. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Lightbox Functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const portfolioImages = document.querySelectorAll('.portfolio-img');
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = lightbox.querySelector('.lightbox-img');
+            const captionTitle = lightbox.querySelector('.caption-title');
+            const captionDesc = lightbox.querySelector('.caption-desc');
+            const closeBtn = lightbox.querySelector('.lightbox-close');
+
+            // Open lightbox when image is clicked
+            portfolioImages.forEach(img => {
+                img.addEventListener('click', () => {
+                    lightbox.classList.add('active');
+                    lightboxImg.src = img.src;
+                    lightboxImg.alt = img.alt;
+                    captionTitle.textContent = img.dataset.title;
+                    captionDesc.textContent = img.dataset.desc;
+                    document.body.style.overflow = 'hidden';
+                });
+            });
+
+            // Close lightbox
+            function closeLightbox() {
+                lightbox.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+
+            closeBtn.addEventListener('click', closeLightbox);
+
+            // Close when clicking outside image
+            lightbox.addEventListener('click', (e) => {
+                if (e.target === lightbox) {
+                    closeLightbox();
+                }
+            });
+
+            // Close with Escape key
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+                    closeLightbox();
+                }
+            });
+
+            // Update copyright year dynamically
+            document.getElementById('year').textContent = new Date().getFullYear();
+        });
+    </script>
+</body>
+</html>

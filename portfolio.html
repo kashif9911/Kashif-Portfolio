@@ -1,0 +1,1116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kashif Imran | Portfolio</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #3498db;
+            --secondary: #9b59b6;
+            --dark: #2c3e50;
+            --light: #ecf0f1;
+            --accent: #e74c3c;
+            --main-bg: #f8f9fa;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background: var(--main-bg);
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        .navbar {
+            background: rgba(44, 62, 80, 0.9);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            width: 90%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 20px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 15px 0;
+            display: block;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 12px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Portfolio Section */
+        .portfolio-section {
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--dark);
+            margin-bottom: 40px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: var(--primary);
+            border-radius: 2px;
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            margin: 50px auto;
+            max-width: 1400px;
+            padding: 0 20px;
+        }
+
+        .portfolio-item {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            background: white;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .portfolio-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .portfolio-img-container {
+            width: 100%;
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f5f5f5;
+            min-height: 250px;
+            overflow: hidden;
+        }
+
+        .portfolio-img {
+            width: 100%;
+            height: auto;
+            max-height: 300px;
+            object-fit: contain;
+            display: block;
+            transition: transform 0.5s ease;
+            padding: 20px;
+        }
+
+        .portfolio-item:hover .portfolio-img {
+            transform: scale(1.05);
+        }
+
+        .portfolio-content {
+            padding: 25px;
+            text-align: left;
+        }
+
+        .portfolio-content h3 {
+            font-size: 1.4rem;
+            margin-bottom: 12px;
+            color: var(--dark);
+        }
+
+        .portfolio-content p {
+            color: #666;
+            margin-bottom: 18px;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .portfolio-category {
+            display: inline-block;
+            background: rgba(52, 152, 219, 0.1);
+            color: var(--primary);
+            padding: 8px 16px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        /* Pagination */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 50px;
+            padding-bottom: 50px;
+        }
+
+        .pagination-list {
+            display: flex;
+            list-style: none;
+            gap: 10px;
+        }
+
+        .pagination-item {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .pagination-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background-color: white;
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .pagination-link:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .pagination-link.active {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        /* Lightbox Styles */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.97);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lightbox.active {
+            display: flex;
+        }
+
+        .lightbox-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90vh;
+            text-align: center;
+        }
+
+        .lightbox-img {
+            max-width: 100%;
+            max-height: 80vh;
+            border-radius: 8px;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.7);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: -50px;
+            right: -15px;
+            color: white;
+            font-size: 35px;
+            cursor: pointer;
+            transition: 0.3s;
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lightbox-close:hover {
+            color: var(--primary);
+            background: rgba(0, 0, 0, 0.9);
+        }
+
+        .lightbox-caption {
+            color: white;
+            text-align: center;
+            margin-top: 25px;
+            padding: 0 30px;
+            max-width: 800px;
+        }
+
+        .lightbox-caption h3 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+
+        .lightbox-caption p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            line-height: 1.7;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--dark);
+            color: rgba(255, 255, 255, 0.85);
+            padding: 40px 0;
+            text-align: center;
+            margin-top: 80px;
+        }
+
+        .copyright {
+            font-size: 1rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .portfolio-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 25px;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .portfolio-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .section-title {
+                font-size: 2.2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+                max-width: 600px;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .nav-container {
+                flex-direction: column;
+                padding: 15px 0;
+            }
+
+            .nav-links {
+                margin-top: 15px;
+                width: 100%;
+                justify-content: space-around;
+            }
+
+            .nav-links li {
+                margin-left: 0;
+            }
+
+            .portfolio-img-container {
+                min-height: 220px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .lightbox-caption h3 {
+                font-size: 1.4rem;
+            }
+
+            .lightbox-caption p {
+                font-size: 1rem;
+            }
+
+            .portfolio-content {
+                padding: 20px;
+            }
+
+            .pagination-item {
+                width: 35px;
+                height: 35px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <a href="index.html" style="color: white; font-weight: 700;">Kashif Imran</a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="portfolio.html">Portfolio</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="certificates.html">Certificates</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Portfolio Section -->
+    <section class="portfolio-section">
+        <div class="container">
+            <h2 class="section-title">My Portfolio</h2>
+            
+            <div class="portfolio-grid">
+                <!-- Items will be loaded dynamically by JavaScript -->
+            </div>
+
+            <!-- Pagination -->
+            <div class="pagination">
+                <ul class="pagination-list">
+                    <!-- Pagination links will be added by JavaScript -->
+                </ul>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+        <div class="lightbox-content">
+            <span class="lightbox-close" aria-label="Close lightbox">&times;</span>
+            <img class="lightbox-img" src="" alt="">
+            <div class="lightbox-caption">
+                <h3 class="caption-title"></h3>
+                <p class="caption-desc"></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="copyright">
+                <p>© <span id="year"></span> Kashif Imran. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Portfolio data - 72 items (6 pages with 12 items each)
+        const portfolioItems = [
+            // Page 1
+            {
+                imgSrc: "Image/Project_1.png",
+                alt: "Pringle City Center Stand",
+                title: "Pringles Display Stand (3 Shelves)",
+                desc: "Bold red-and-gold stand with glitter accents and three spacious shelves. Designed to attract attention and showcase Pringles in high-traffic retail areas with strong visual impact.",
+                category: "3D Modeling"
+            },
+            {
+                imgSrc: "Image/Project_2.png",
+                alt: "Pringle City Center Stand",
+                title: "Double-Bay Pringles Display Stand (6 Shelves)",
+                desc: "A bold, gold-accented 3D display with two bays and six spacious shelves. Designed for maximum product exposure and visual appeal, perfect for retail promotions and high-footfall areas.",
+                category: "3D Modeling"
+            },
+            {
+                imgSrc: "Image/Project_3.png",
+                alt: "Pringle City Center Stand",
+                title: "Large-Format Pringles Display Stand (12 Shelves)",
+                desc: "A high-capacity 3D display stand with 12 shelves across four bays. Designed with vibrant Pringles branding and gold accents, it's perfect for maximizing product visibility in busy retail environments.",
+                category: "3D Modeling"
+            },
+            {
+                imgSrc: "Image/Project_4.png",
+                alt: "Kellogg's Nuttybar City Center Stand",
+                title: "Kellogg's Nuttybar Stand",
+                desc: "A bold, nutty-themed display designed for city centers, featuring eye-catching 3D elements and vibrant branding to attract customers. Perfect for promotions and tastings!",
+                category: "3D Modeling"
+            },
+            {
+                imgSrc: "Image/Project_5.png",
+                alt: "Kellogg's Nutty Bar Display Stand",
+                title: "Kellogg's Nuttybar Stand",
+                desc: "A bold, nutty-themed display designed for city centers, featuring eye-catching 3D elements and vibrant branding to attract customers. Perfect for promotions and tastings!",
+                category: "3D Modeling"
+            },
+            {
+                imgSrc: "Image/Project_6.png",
+                alt: "bahlsen Products shalves",
+                title: "bahlsen stand",
+                desc: "A compact, illuminated 3D display with LED lightbox panels and a center demo shelf—perfect for high-traffic promotions. Eye-catching, durable, and brand-boosting!",
+                category: "3D Modeling"
+            },
+            {
+                imgSrc: "Image/Project_6a.png",
+                alt: "Bahlsen Display Stand Design – Al Khawaneej Mall",
+                title: "Bahlsen Display Stand Design – Al Khawaneej Mall",
+                desc: "This Bahlsen display stand was designed in Adobe Illustrator for Al Khawaneej Mall.						It features bold branding, bilingual shelf strips, and clear product messaging.							The layout uses vibrant colors to maximize visibility and shelf impact.",
+                category: "2D Illustrating"
+            },
+            {
+                imgSrc: "Image/Project_7.png",
+                alt: "Pringle City Center Stand",
+                title: "Pringle City Center Stand",
+                desc: "This Pringles chip stand was designed for promotional retail display.It features vibrant graphics, bold branding, and a sports theme to attract attention.Perfect for stacking chip cans while reinforcing the campaign message visually.",
+                category: "3D Modeling"
+            },
+            {
+                imgSrc: "Image/Project_8.png",
+                alt: "Al Tayer Expo stand",
+                title: "Al Tayer Expo stand",
+                desc: "This modern 3D expo stand was designed to showcase a stylish, welcoming brand presence.It features a clean architectural layout with a reception, seating areas, and product zones.The vibrant color palette and open structure enhance visibility and visitor flow.",
+                category: "Exhibition Design"
+            },
+            {
+                imgSrc: "Image/Project_9.png",
+                alt: "Al Areesh Exhibition Stand",
+                title: "Al Areesh Exhibition Stand",
+                desc: "Designed and modeled in 3ds Max with detailed technical drawings created in AutoCAD.The stand features clean branding, product-focused visuals, and a functional layout for client interaction.",
+                category: "Stage Design"
+            },
+            {
+                imgSrc: "Image/Project_9a.png",
+                alt: "Al Areesh Exhibition Stand",
+                title: "Al Areesh Exhibition Stand",
+                desc: "Side view",
+                category: "Retail Design"
+            },
+            {
+                imgSrc: "Image/Project_10.png",
+                alt: "Concept Store",
+                title: "Concept Store",
+                desc: "Innovative retail concept store blending physical and digital shopping experiences.",
+                category: "Retail Design"
+            },
+            
+            // Page 2 (12 items)
+            {
+                imgSrc: "Image/Project_11.png",
+                alt: "Office Design 1",
+                title: "Modern Office Space",
+                desc: "Contemporary office design with ergonomic furniture and open spaces.",
+                category: "Interior Design"
+            },
+            {
+                imgSrc: "Image/Project_12.png",
+                alt: "Restaurant Branding",
+                title: "Gourmet Restaurant Identity",
+                desc: "Complete branding package for a high-end restaurant including logo and menus.",
+                category: "Branding"
+            },
+            {
+                imgSrc: "Image/Project_13.png",
+                alt: "Hotel Lobby",
+                title: "Luxury Hotel Lobby",
+                desc: "Elegant hotel lobby design with premium materials and lighting.",
+                category: "Interior Design"
+            },
+            {
+                imgSrc: "Image/Project_14.png",
+                alt: "Product Catalog",
+                title: "Fashion Catalog Design",
+                desc: "Minimalist fashion product catalog with clean typography.",
+                category: "Graphic Design"
+            },
+            {
+                imgSrc: "Image/Project_15.png",
+                alt: "Exhibition Stand 2",
+                title: "Tech Expo Stand",
+                desc: "Futuristic exhibition stand for a technology conference.",
+                category: "3D Design"
+            },
+            {
+                imgSrc: "Image/Project_16.png",
+                alt: "Packaging Design 2",
+                title: "Eco-Friendly Packaging",
+                desc: "Sustainable packaging solution using recycled materials.",
+                category: "Product Design"
+            },
+            {
+                imgSrc: "Image/Project_17.png",
+                alt: "Retail Display 2",
+                title: "Cosmetics Display",
+                desc: "Elegant cosmetics counter display with integrated lighting.",
+                category: "Retail Design"
+            },
+            {
+                imgSrc: "Image/Project_18.png",
+                alt: "Trade Show 2",
+                title: "Automotive Exhibition",
+                desc: "Dynamic exhibition stand for an automotive brand.",
+                category: "Exhibition Design"
+            },
+            {
+                imgSrc: "Image/Project_19.png",
+                alt: "Office Design 2",
+                title: "Co-Working Space",
+                desc: "Modern co-working space with flexible work areas.",
+                category: "Interior Design"
+            },
+            {
+                imgSrc: "Image/Project_20.png",
+                alt: "Brand Identity 2",
+                title: "Startup Branding",
+                desc: "Complete visual identity for a tech startup.",
+                category: "Brand Identity"
+            },
+            {
+                imgSrc: "Image/Project_21.png",
+                alt: "Packaging Design 3",
+                title: "Luxury Gift Box",
+                desc: "Premium packaging for high-end jewelry brand.",
+                category: "Packaging Design"
+            },
+            {
+                imgSrc: "Image/Project_22.png",
+                alt: "Retail Store 2",
+                title: "Boutique Store Design",
+                desc: "Chic boutique store layout with custom displays.",
+                category: "Retail Design"
+            },
+			 
+			
+			// Page 3 (12 items)
+            {
+                imgSrc: "Image/Project_23.png",
+                alt: "Office Design 1",
+                title: "Modern Office Space",
+                desc: "Contemporary office design with ergonomic furniture and open spaces.",
+                category: "Interior Design"
+            },
+            {
+                imgSrc: "Image/Project_24.png",
+                alt: "Restaurant Branding",
+                title: "Gourmet Restaurant Identity",
+                desc: "Complete branding package for a high-end restaurant including logo and menus.",
+                category: "Branding"
+            },
+            {
+                imgSrc: "Image/Project_25.png",
+                alt: "Hotel Lobby",
+                title: "Luxury Hotel Lobby",
+                desc: "Elegant hotel lobby design with premium materials and lighting.",
+                category: "Interior Design"
+            },
+            {
+                imgSrc: "Image/Project_26.png",
+                alt: "Product Catalog",
+                title: "Fashion Catalog Design",
+                desc: "Minimalist fashion product catalog with clean typography.",
+                category: "Graphic Design"
+            },
+            {
+                imgSrc: "Image/Project_27.png",
+                alt: "Exhibition Stand 2",
+                title: "Tech Expo Stand",
+                desc: "Futuristic exhibition stand for a technology conference.",
+                category: "3D Design"
+            },
+            {
+                imgSrc: "Image/Project_28.png",
+                alt: "Packaging Design 2",
+                title: "Eco-Friendly Packaging",
+                desc: "Sustainable packaging solution using recycled materials.",
+                category: "Product Design"
+            },
+            {
+                imgSrc: "Image/Project_31.png",
+                alt: "Retail Display 2",
+                title: "Cosmetics Display",
+                desc: "Elegant cosmetics counter display with integrated lighting.",
+                category: "Retail Design"
+            },
+            {
+                imgSrc: "Image/Project_29.png",
+                alt: "Trade Show 2",
+                title: "Automotive Exhibition",
+                desc: "Dynamic exhibition stand for an automotive brand.",
+                category: "Exhibition Design"
+            },
+            {
+                imgSrc: "Image/Project_30.png",
+                alt: "Office Design 2",
+                title: "Co-Working Space",
+                desc: "Modern co-working space with flexible work areas.",
+                category: "Interior Design"
+            },
+            {
+                imgSrc: "Image/Project_31.png",
+                alt: "Brand Identity 2",
+                title: "Startup Branding",
+                desc: "Complete visual identity for a tech startup.",
+                category: "Brand Identity"
+            },
+            {
+                imgSrc: "Image/Project_32.png",
+                alt: "Packaging Design 3",
+                title: "Luxury Gift Box",
+                desc: "Premium packaging for high-end jewelry brand.",
+                category: "Packaging Design"
+            },
+            {
+                imgSrc: "Image/Project_33.png",
+                alt: "Retail Store 2",
+                title: "Boutique Store Design",
+                desc: "Chic boutique store layout with custom displays.",
+                category: "Retail Design"
+            },
+
+			// Page 4 (12 items)
+            {
+                imgSrc: "Image/Project_34.png",
+                alt: "Office Design 1",
+                title: "Modern Office Space",
+                desc: "Contemporary office design with ergonomic furniture and open spaces.",
+                category: "Interior Design"
+            },
+            {
+                imgSrc: "Image/Project_35.png",
+                alt: "Restaurant Branding",
+                title: "Gourmet Restaurant Identity",
+                desc: "Complete branding package for a high-end restaurant including logo and menus.",
+                category: "Branding"
+            },
+            {
+                imgSrc: "Image/Project_36.png",
+                alt: "Hotel Lobby",
+                title: "Luxury Hotel Lobby",
+                desc: "Elegant hotel lobby design with premium materials and lighting.",
+                category: "Interior Design"
+            },
+            {
+                imgSrc: "Image/Project_37.png",
+                alt: "Product Catalog",
+                title: "Fashion Catalog Design",
+                desc: "Minimalist fashion product catalog with clean typography.",
+                category: "Graphic Design"
+            },
+            {
+                imgSrc: "Image/Project_38.png",
+                alt: "Exhibition Stand 2",
+                title: "Tech Expo Stand",
+                desc: "Futuristic exhibition stand for a technology conference.",
+                category: "3D Design"
+            },
+            {
+                imgSrc: "Image/Project_39.png",
+                alt: "Packaging Design 2",
+                title: "Eco-Friendly Packaging",
+                desc: "Sustainable packaging solution using recycled materials.",
+                category: "Product Design"
+            },
+            {
+                imgSrc: "Image/Project_40.png",
+                alt: "Retail Display 2",
+                title: "Cosmetics Display",
+                desc: "Elegant cosmetics counter display with integrated lighting.",
+                category: "Retail Design"
+            },
+            {
+                imgSrc: "Image/Project_41.png",
+                alt: "Trade Show 2",
+                title: "Automotive Exhibition",
+                desc: "Dynamic exhibition stand for an automotive brand.",
+                category: "Exhibition Design"
+            },
+            {
+                imgSrc: "Image/Project_42.png",
+                alt: "Office Design 2",
+                title: "Co-Working Space",
+                desc: "Modern co-working space with flexible work areas.",
+                category: "Interior Design"
+            },
+            {
+                imgSrc: "Image/Project_43.png",
+                alt: "Brand Identity 2",
+                title: "Startup Branding",
+                desc: "Complete visual identity for a tech startup.",
+                category: "Brand Identity"
+            },
+            {
+                imgSrc: "Image/Project_44.png",
+                alt: "Packaging Design 3",
+                title: "Luxury Gift Box",
+                desc: "Premium packaging for high-end jewelry brand.",
+                category: "Packaging Design"
+            },
+            {
+                imgSrc: "Image/Project_45.png",
+                alt: "Retail Store 2",
+                title: "Boutique Store Design",
+                desc: "Chic boutique store layout with custom displays.",
+                category: "Retail Design"
+            },
+
+			// Page 5 (12 items)
+            {
+                imgSrc: "Image/Project_46.png",
+                alt: "Office Design 1",
+                title: "Modern Office Space",
+                desc: "Contemporary office design with ergonomic furniture and open spaces.",
+                category: "Interior Design"
+            },
+            {
+                imgSrc: "Image/Project_47.png",
+                alt: "Restaurant Branding",
+                title: "Gourmet Restaurant Identity",
+                desc: "Complete branding package for a high-end restaurant including logo and menus.",
+                category: "Branding"
+            },
+            {
+                imgSrc: "Image/Project_48.png",
+                alt: "Hotel Lobby",
+                title: "Luxury Hotel Lobby",
+                desc: "Elegant hotel lobby design with premium materials and lighting.",
+                category: "Interior Design"
+            },
+            {
+                imgSrc: "Image/Project_49.png",
+                alt: "Product Catalog",
+                title: "Fashion Catalog Design",
+                desc: "Minimalist fashion product catalog with clean typography.",
+                category: "Graphic Design"
+            },
+            {
+                imgSrc: "Image/Project_50.png",
+                alt: "Exhibition Stand 2",
+                title: "Tech Expo Stand",
+                desc: "Futuristic exhibition stand for a technology conference.",
+                category: "3D Design"
+            },
+            {
+                imgSrc: "Image/Project_51.png",
+                alt: "Packaging Design 2",
+                title: "Eco-Friendly Packaging",
+                desc: "Sustainable packaging solution using recycled materials.",
+                category: "Product Design"
+            },
+            {
+                imgSrc: "Image/Project_52.png",
+                alt: "Retail Display 2",
+                title: "Cosmetics Display",
+                desc: "Elegant cosmetics counter display with integrated lighting.",
+                category: "Retail Design"
+            },
+            {
+                imgSrc: "Image/Project_53.png",
+                alt: "Trade Show 2",
+                title: "Automotive Exhibition",
+                desc: "Dynamic exhibition stand for an automotive brand.",
+                category: "Exhibition Design"
+            },
+            {
+                imgSrc: "Image/Project_54.png",
+                alt: "Office Design 2",
+                title: "Co-Working Space",
+                desc: "Modern co-working space with flexible work areas.",
+                category: "Interior Design"
+            },
+            {
+                imgSrc: "Image/Project_55.png",
+                alt: "Brand Identity 2",
+                title: "Startup Branding",
+                desc: "Complete visual identity for a tech startup.",
+                category: "Brand Identity"
+            },
+            {
+                imgSrc: "Image/Project_56.png",
+                alt: "Packaging Design 3",
+                title: "Luxury Gift Box",
+                desc: "Premium packaging for high-end jewelry brand.",
+                category: "Packaging Design"
+            },
+            {
+                imgSrc: "Image/Project_57.png",
+                alt: "Retail Store 2",
+                title: "Boutique Store Design",
+                desc: "Chic boutique store layout with custom displays.",
+                category: "Retail Design"
+            },
+
+			// Page 6 (12 items)
+            {
+                imgSrc: "Image/Project_58.png",
+                alt: "Office Design 1",
+                title: "Modern Office Space",
+                desc: "Contemporary office design with ergonomic furniture and open spaces.",
+                category: "Interior Design"
+            },
+            {
+                imgSrc: "Image/Project_59.png",
+                alt: "Restaurant Branding",
+                title: "Gourmet Restaurant Identity",
+                desc: "Complete branding package for a high-end restaurant including logo and menus.",
+                category: "Branding"
+            },
+            {
+                imgSrc: "Image/Project_60.png",
+                alt: "Hotel Lobby",
+                title: "Luxury Hotel Lobby",
+                desc: "Elegant hotel lobby design with premium materials and lighting.",
+                category: "Interior Design"
+            },
+            {
+                imgSrc: "Image/Project_61.png",
+                alt: "Product Catalog",
+                title: "Fashion Catalog Design",
+                desc: "Minimalist fashion product catalog with clean typography.",
+                category: "Graphic Design"
+            },
+            {
+                imgSrc: "Image/Project_62.png",
+                alt: "Exhibition Stand 2",
+                title: "Tech Expo Stand",
+                desc: "Futuristic exhibition stand for a technology conference.",
+                category: "3D Design"
+            },
+            {
+                imgSrc: "Image/Project_63.png",
+                alt: "Packaging Design 2",
+                title: "Eco-Friendly Packaging",
+                desc: "Sustainable packaging solution using recycled materials.",
+                category: "Product Design"
+            },
+            {
+                imgSrc: "Image/Project_64.png",
+                alt: "Retail Display 2",
+                title: "Cosmetics Display",
+                desc: "Elegant cosmetics counter display with integrated lighting.",
+                category: "Retail Design"
+            },
+            {
+                imgSrc: "Image/Project_65.png",
+                alt: "Trade Show 2",
+                title: "Automotive Exhibition",
+                desc: "Dynamic exhibition stand for an automotive brand.",
+                category: "Exhibition Design"
+            },
+            {
+                imgSrc: "Image/Project_66.png",
+                alt: "Office Design 2",
+                title: "Co-Working Space",
+                desc: "Modern co-working space with flexible work areas.",
+                category: "Interior Design"
+            },
+            {
+                imgSrc: "Image/Project_67.png",
+                alt: "Brand Identity 2",
+                title: "Startup Branding",
+                desc: "Complete visual identity for a tech startup.",
+                category: "Brand Identity"
+            },
+            {
+                imgSrc: "Image/Project_68.png",
+                alt: "Packaging Design 3",
+                title: "Luxury Gift Box",
+                desc: "Premium packaging for high-end jewelry brand.",
+                category: "Packaging Design"
+            },
+            {
+                imgSrc: "Image/Project_69.png",
+                alt: "Retail Store 2",
+                title: "Boutique Store Design",
+                desc: "Chic boutique store layout with custom displays.",
+                category: "Retail Design"
+            },
+
+            // Page 3-6 would continue with similar items...
+            // For brevity, I've included 2 full pages (24 items)
+            // You would add 48 more items following the same pattern
+        ];
+
+        // Configuration
+        const itemsPerPage = 12; // 12 items per page (4 columns × 3 rows)
+        let currentPage = 1;
+
+        // Initialize when DOM loads
+        document.addEventListener('DOMContentLoaded', function() {
+            displayPortfolioItems(currentPage);
+            setupPagination();
+            setupLightbox();
+            document.getElementById('year').textContent = new Date().getFullYear();
+        });
+
+        // Display items for current page
+        function displayPortfolioItems(page) {
+            const portfolioGrid = document.querySelector('.portfolio-grid');
+            portfolioGrid.innerHTML = '';
+
+            const startIndex = (page - 1) * itemsPerPage;
+            const endIndex = startIndex + itemsPerPage;
+            const paginatedItems = portfolioItems.slice(startIndex, endIndex);
+
+            paginatedItems.forEach(item => {
+                const portfolioItem = document.createElement('div');
+                portfolioItem.className = 'portfolio-item';
+                portfolioItem.innerHTML = `
+                    <div class="portfolio-img-container">
+                        <img src="${item.imgSrc}" 
+                             alt="${item.alt}" 
+                             class="portfolio-img"
+                             data-title="${item.title}"
+                             data-desc="${item.desc}">
+                    </div>
+                    <div class="portfolio-content">
+                        <h3>${item.title}</h3>
+                        <p>${item.desc}</p>
+                        <span class="portfolio-category">${item.category}</span>
+                    </div>
+                `;
+                portfolioGrid.appendChild(portfolioItem);
+            });
+
+            setupLightbox(); // Reattach event listeners
+        }
+
+        // Setup pagination controls
+        function setupPagination() {
+            const totalPages = 6; // Fixed to 6 pages
+            const paginationList = document.querySelector('.pagination-list');
+            paginationList.innerHTML = '';
+
+            // Previous button
+            if (currentPage > 1) {
+                paginationList.appendChild(createPaginationItem('prev', currentPage - 1, '<i class="fas fa-chevron-left"></i>'));
+            }
+
+            // Page numbers - showing 6 pages
+            for (let i = 1; i <= totalPages; i++) {
+                paginationList.appendChild(createPaginationItem('page', i, i));
+            }
+
+            // Next button
+            if (currentPage < totalPages) {
+                paginationList.appendChild(createPaginationItem('next', currentPage + 1, '<i class="fas fa-chevron-right"></i>'));
+            }
+
+            // Add click handlers
+            document.querySelectorAll('.pagination-link').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    currentPage = parseInt(this.dataset.page);
+                    displayPortfolioItems(currentPage);
+                    setupPagination();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            });
+        }
+
+        // Helper to create pagination items
+        function createPaginationItem(type, page, content) {
+            const item = document.createElement('li');
+            item.className = 'pagination-item';
+            const activeClass = (type === 'page' && page === currentPage) ? 'active' : '';
+            item.innerHTML = `
+                <a href="#" class="pagination-link ${activeClass}" data-page="${page}">
+                    ${content}
+                </a>
+            `;
+            return item;
+        }
+
+        // Lightbox functionality
+        function setupLightbox() {
+            const portfolioImages = document.querySelectorAll('.portfolio-img');
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = lightbox.querySelector('.lightbox-img');
+            const captionTitle = lightbox.querySelector('.caption-title');
+            const captionDesc = lightbox.querySelector('.caption-desc');
+            const closeBtn = lightbox.querySelector('.lightbox-close');
+
+            // Open lightbox when image is clicked
+            portfolioImages.forEach(img => {
+                img.addEventListener('click', () => {
+                    lightbox.classList.add('active');
+                    lightboxImg.src = img.src;
+                    lightboxImg.alt = img.alt;
+                    captionTitle.textContent = img.dataset.title;
+                    captionDesc.textContent = img.dataset.desc;
+                    document.body.style.overflow = 'hidden';
+                });
+            });
+
+            // Close lightbox
+            function closeLightbox() {
+                lightbox.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+
+            closeBtn.addEventListener('click', closeLightbox);
+
+            // Close when clicking outside image
+            lightbox.addEventListener('click', (e) => {
+                if (e.target === lightbox) {
+                    closeLightbox();
+                }
+            });
+
+            // Close with Escape key
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+                    closeLightbox();
+                }
+            });
+        }
+    </script>
+</body>
+</html>
