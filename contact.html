@@ -271,9 +271,13 @@
             <h2 class="section-title">Get In Touch</h2>
             <form id="contactForm" class="contact-form" action="https://formsubmit.co/kashif9911@hotmail.com" method="POST">
                 <!-- FormSubmit Customizations -->
-                <input type="hidden" name="_subject" value="New message from your portfolio!">
-                <input type="hidden" name="_autoresponse" value="Thank you for your message! I'll get back to you soon.">
+                <input type="hidden" name="_subject" value="New Portfolio Message from {{name}}">
+                <input type="hidden" name="_autoresponse" value="Thank you {{name}} for your message! I'll get back to you soon regarding: '{{subject}}'">
                 <input type="hidden" name="_template" value="table">
+                <input type="hidden" name="_honey" value="">
+                <input type="hidden" name="_captcha" value="false">
+                <input type="hidden" name="_format" value="plaintext">
+                <input type="hidden" name="_next" value="https://yourwebsite.com/thank-you.html">
 
                 <!-- Form Fields -->
                 <div class="form-group">
@@ -322,7 +326,7 @@
             e.preventDefault();
             
             // Submit form via FormSubmit
-            fetch('https://formsubmit.co/ajax/your-email@example.com', {
+            fetch('https://formsubmit.co/ajax/your-email@hotmail.com', {
                 method: 'POST',
                 body: new FormData(this)
             })
