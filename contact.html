@@ -6,8 +6,6 @@
     <title>Kashif Imran | Contact</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
-    <!-- hCaptcha (for spam protection) -->
-    <script src="https://js.hcaptcha.com/1/api.js" async defer></script>
     <style>
         * {
             margin: 0;
@@ -204,7 +202,7 @@
             }
         }
 
-        /* Thank You Popup (NEW) */
+        /* Thank You Popup */
         .thank-you-popup {
             display: none;
             position: fixed;
@@ -276,7 +274,6 @@
                 <input type="hidden" name="_subject" value="New message from your portfolio!">
                 <input type="hidden" name="_autoresponse" value="Thank you for your message! I'll get back to you soon.">
                 <input type="hidden" name="_template" value="table">
-                <input type="hidden" name="_captcha" value="false">
 
                 <!-- Form Fields -->
                 <div class="form-group">
@@ -296,11 +293,6 @@
                     <textarea id="message" name="message" required></textarea>
                 </div>
                 
-                <!-- hCaptcha Spam Protection -->
-                <div class="form-group">
-                    <div class="h-captcha" data-sitekey="your-hcaptcha-site-key"></div>
-                </div>
-                
                 <button type="submit" class="submit-btn">Send Message</button>
             </form>
         </div>
@@ -315,7 +307,7 @@
         </div>
     </footer>
 
-    <!-- Thank You Popup (NEW) -->
+    <!-- Thank You Popup -->
     <div id="thankYouPopup" class="thank-you-popup">
         <div class="thank-you-content">
             <h3>Thank You!</h3>
@@ -329,13 +321,6 @@
         document.getElementById('contactForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
-            // Validate hCaptcha
-            const hcaptchaVal = document.querySelector('[name=h-captcha-response]').value;
-            if (!hcaptchaVal) {
-                alert('Please complete the captcha');
-                return;
-            }
-            
             // Submit form via FormSubmit
             fetch('https://formsubmit.co/ajax/your-email@example.com', {
                 method: 'POST',
@@ -346,11 +331,6 @@
                 if (data.success) {
                     showThankYouPopup();
                     this.reset();
-                    
-                    // Reset hCaptcha
-                    if (typeof hcaptcha !== 'undefined') {
-                        hcaptcha.reset();
-                    }
                 } else {
                     alert('Error: ' + (data.message || 'Something went wrong'));
                 }
