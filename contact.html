@@ -6,6 +6,8 @@
     <title>Kashif Imran | Contact</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <!-- hCaptcha (for spam protection) -->
+    <script src="https://js.hcaptcha.com/1/api.js" async defer></script>
     <style>
         * {
             margin: 0;
@@ -201,6 +203,51 @@
                 font-size: 1.8rem;
             }
         }
+
+        /* Thank You Popup (NEW) */
+        .thank-you-popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .thank-you-content {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+        }
+        
+        .thank-you-content h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .popup-close-btn {
+            margin-top: 20px;
+            padding: 8px 20px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            transition: background 0.3s ease;
+        }
+        
+        .popup-close-btn:hover {
+            background: #2980b9;
+        }
     </style>
 </head>
 <body>
@@ -208,8 +255,6 @@
     <nav class="navbar">
         <div class="nav-container">
             <div class="logo">
-				<link rel="icon" type="image/x-icon" href="image/logotype_dark">
-
                 <a href="index.html" style="color: white; font-weight: 700;">Kashif Imran</a>
             </div>
             <ul class="nav-links">
@@ -226,7 +271,14 @@
     <section class="contact-section">
         <div class="container">
             <h2 class="section-title">Get In Touch</h2>
-            <form class="contact-form">
+            <form id="contactForm" class="contact-form" action="https://formsubmit.co/your-email@example.com" method="POST">
+                <!-- FormSubmit Customizations -->
+                <input type="hidden" name="_subject" value="New message from your portfolio!">
+                <input type="hidden" name="_autoresponse" value="Thank you for your message! I'll get back to you soon.">
+                <input type="hidden" name="_template" value="table">
+                <input type="hidden" name="_captcha" value="false">
+
+                <!-- Form Fields -->
                 <div class="form-group">
                     <label for="name">Your Name</label>
                     <input type="text" id="name" name="name" required>
@@ -243,6 +295,12 @@
                     <label for="message">Your Message</label>
                     <textarea id="message" name="message" required></textarea>
                 </div>
+                
+                <!-- hCaptcha Spam Protection -->
+                <div class="form-group">
+                    <div class="h-captcha" data-sitekey="your-hcaptcha-site-key"></div>
+                </div>
+                
                 <button type="submit" class="submit-btn">Send Message</button>
             </form>
         </div>
@@ -256,5 +314,60 @@
             </div>
         </div>
     </footer>
+
+    <!-- Thank You Popup (NEW) -->
+    <div id="thankYouPopup" class="thank-you-popup">
+        <div class="thank-you-content">
+            <h3>Thank You!</h3>
+            <p>Your message has been sent successfully.</p>
+            <button class="popup-close-btn" onclick="closeThankYouPopup()">Close</button>
+        </div>
+    </div>
+
+    <script>
+        // Form submission handler
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Validate hCaptcha
+            const hcaptchaVal = document.querySelector('[name=h-captcha-response]').value;
+            if (!hcaptchaVal) {
+                alert('Please complete the captcha');
+                return;
+            }
+            
+            // Submit form via FormSubmit
+            fetch('https://formsubmit.co/ajax/your-email@example.com', {
+                method: 'POST',
+                body: new FormData(this)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    showThankYouPopup();
+                    this.reset();
+                    
+                    // Reset hCaptcha
+                    if (typeof hcaptcha !== 'undefined') {
+                        hcaptcha.reset();
+                    }
+                } else {
+                    alert('Error: ' + (data.message || 'Something went wrong'));
+                }
+            })
+            .catch(error => {
+                alert('Error: ' + error.message);
+            });
+        });
+
+        // Popup functions
+        function showThankYouPopup() {
+            document.getElementById('thankYouPopup').style.display = 'flex';
+        }
+
+        function closeThankYouPopup() {
+            document.getElementById('thankYouPopup').style.display = 'none';
+        }
+    </script>
 </body>
 </html>
