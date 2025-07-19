@@ -276,8 +276,8 @@
                 <input type="hidden" name="_template" value="table">
                 <input type="hidden" name="_honey" value="">
                 <input type="hidden" name="_captcha" value="false">
-                <input type="hidden" name="_format" value="plaintext">
                 <input type="hidden" name="_next" value="https://yourwebsite.com/thank-you.html">
+                <input type="hidden" name="_replyto" value="">
 
                 <!-- Form Fields -->
                 <div class="form-group">
@@ -325,8 +325,12 @@
         document.getElementById('contactForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
+            // Set the reply-to field dynamically
+            const emailInput = document.getElementById('email');
+            document.querySelector('input[name="_replyto"]').value = emailInput.value;
+            
             // Submit form via FormSubmit
-            fetch('https://formsubmit.co/ajax/your-email@hotmail.com', {
+            fetch('https://formsubmit.co/ajax/kashif9911@hotmail.com', {
                 method: 'POST',
                 body: new FormData(this)
             })
@@ -351,6 +355,8 @@
 
         function closeThankYouPopup() {
             document.getElementById('thankYouPopup').style.display = 'none';
+            // Redirect if needed
+            // window.location.href = "https://yourwebsite.com/thank-you.html";
         }
     </script>
 </body>
