@@ -160,6 +160,13 @@
             padding: 20px;
         }
 
+		.portfolio-video {
+    width: 100%;
+    height: 300px;
+    object-fit: contain;
+    display: block;
+}
+
         .portfolio-item:hover .portfolio-img {
             transform: scale(1.05);
         }
@@ -1014,20 +1021,50 @@
             paginatedItems.forEach(item => {
                 const portfolioItem = document.createElement('div');
                 portfolioItem.className = 'portfolio-item';
-                portfolioItem.innerHTML = `
-                    <div class="portfolio-img-container">
-                        <img src="${item.imgSrc}" 
-                             alt="${item.alt}" 
-                             class="portfolio-img"
-                             data-title="${item.title}"
-                             data-desc="${item.desc}">
-                    </div>
-                    <div class="portfolio-content">
-                        <h3>${item.title}</h3>
-                        <p>${item.desc}</p>
-                        <span class="portfolio-category">${item.category}</span>
-                    </div>
-                `;
+                // portfolioItem.innerHTML = `
+                //     <div class="portfolio-img-container">
+                //         <img src="${item.imgSrc}" 
+                //              alt="${item.alt}" 
+                //              class="portfolio-img"
+                //              data-title="${item.title}"
+                //              data-desc="${item.desc}">
+                //     </div>
+                //     <div class="portfolio-content">
+                //         <h3>${item.title}</h3>
+                //         <p>${item.desc}</p>
+                //         <span class="portfolio-category">${item.category}</span>
+                //     </div>
+                // `;
+portfolioItem.innerHTML = `
+    <div class="portfolio-img-container">
+        ${
+            item.videoSrc
+                ? `
+                <video class="portfolio-video" autoplay muted loop playsinline controls>
+                    <source src="${item.videoSrc}" type="video/mp4">
+                </video>
+                `
+                : `
+                <img src="${item.imgSrc}"
+                     alt="${item.alt}"
+                     class="portfolio-img"
+                     data-title="${item.title}"
+                     data-desc="${item.desc}">
+                `
+        }
+    </div>
+
+    <div class="portfolio-content">
+        <h3>${item.title}</h3>
+        <p>${item.desc}</p>
+        <span class="portfolio-category">${item.category}</span>
+    </div>
+`;
+
+
+// .................................................
+
+				
                 portfolioGrid.appendChild(portfolioItem);
             });
 
