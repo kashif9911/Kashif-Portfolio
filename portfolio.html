@@ -38,7 +38,7 @@ body {
     margin:0 auto
 }
 .navbar {
-    background:rgba(44, 62, 80, 0.9);
+    background:rgba(44,62,80,.96);
     position:sticky;
     top:0;
     z-index:1000;
@@ -99,14 +99,14 @@ body {
     padding:85px 0 80px;
     scroll-margin-top:80px;
     text-align:center;
-    background:#050505;
-    color:#fff;
+    background:var(--main-bg);
+    color:var(--dark);
     overflow:hidden
 }
 .section-title {
     font-family:'Playfair Display',serif;
     font-size:2.5rem;
-    color:#fff;
+    color:var(--dark);
     margin-bottom:20px;
     position:relative;
     display:inline-block
@@ -123,7 +123,7 @@ body {
     border-radius:2px
 }
 .subtitle {
-    color:rgba(255,255,255,.75);
+    color:var(--dark);
     margin:35px auto 0;
     max-width:1000px
 }
@@ -136,9 +136,9 @@ body {
     padding:0 15px
 }
 .filter-btn {
-    background:rgba(255,255,255,.06);
-    color:#fff;
-    border:1px solid rgba(255,255,255,.2);
+    background:#fff;
+    color:var(--dark);
+    border:1px solid #dfe3e8;
     padding:12px 24px;
     border-radius:30px;
     font-size:15px;
@@ -184,12 +184,11 @@ body {
 }
 .portfolio-grid:before {
     left:0;
-    background:linear-gradient(to right,#050505,transparent)
+    background:linear-gradient(to right,var(--main-bg),transparent)
 }
-
 .portfolio-grid:after {
     right:0;
-    background:linear-gradient(to left,#050505,transparent)
+    background:linear-gradient(to left,var(--main-bg),transparent)
 }
 .portfolio-track {
     display:flex;
