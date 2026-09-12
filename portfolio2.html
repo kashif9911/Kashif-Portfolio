@@ -1,1 +1,1107 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Kashif Imran | Portfolio
+  </title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet"/>
+  <style>
+   * {
+    margin:0;
+    padding:0;
+    box-sizing:border-box
+}
+:root {
+    --primary:#3498db;
+    --secondary:#9b59b6;
+    --dark:#2c3e50;
+    --light:#ecf0f1;
+    --accent:#e74c3c;
+    --main-bg:#f8f9fa
+}
+html {
+    scroll-behavior:smooth
+}
+body {
+    font-family:Poppins,sans-serif;
+    line-height:1.6;
+    color:var(--dark);
+    background:var(--main-bg);
+    overflow-x:hidden
+}
+.container {
+    width:90%;
+    max-width:1400px;
+    margin:0 auto
+}
+.navbar {
+    background:rgba(44,62,80,.96);
+    position:sticky;
+    top:0;
+    z-index:1000;
+    box-shadow:0 2px 10px rgba(0,0,0,.25);
+    backdrop-filter:blur(10px)
+}
+.nav-container {
+    width:90%;
+    max-width:1200px;
+    margin:auto;
+    padding:0 20px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    min-height:60px
+}
+.logo a {
+    color:#fff;
+    text-decoration:none;
+    font-weight:700;
+    font-size:1rem;
+    display:block;
+    padding:15px 0
+}
+.nav-links {
+    display:flex;
+    list-style:none
+}
+.nav-links li {
+    margin-left:20px
+}
+.nav-links a {
+    color:#fff;
+    text-decoration:none;
+    font-weight:500;
+    padding:15px 0;
+    display:block;
+    position:relative;
+    transition:color .3s
+}
+.nav-links a:hover {
+    color:var(--primary)
+}
+.nav-links a:after {
+    content:'';
+    position:absolute;
+    bottom:12px;
+    left:0;
+    width:0;
+    height:2px;
+    background:var(--primary);
+    transition:width .3s
+}
+.nav-links a:hover:after {
+    width:100%
+}
+.portfolio-section {
+    padding:85px 0 80px;
+    scroll-margin-top:80px;
+    text-align:center;
+    background:#050505;
+    color:#fff;
+    overflow:hidden
+}
+.section-title {
+    font-family:'Playfair Display',serif;
+    font-size:2.5rem;
+    color:#fff;
+    margin-bottom:20px;
+    position:relative;
+    display:inline-block
+}
+.section-title:after {
+    content:'';
+    position:absolute;
+    bottom:-15px;
+    left:50%;
+    transform:translateX(-50%);
+    width:100px;
+    height:4px;
+    background:var(--primary);
+    border-radius:2px
+}
+.subtitle {
+    color:rgba(255,255,255,.75);
+    margin:35px auto 0;
+    max-width:1000px
+}
+.filter-buttons {
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:15px;
+    margin:40px 0;
+    padding:0 15px
+}
+.filter-btn {
+    background:rgba(255,255,255,.06);
+    color:#fff;
+    border:1px solid rgba(255,255,255,.2);
+    padding:12px 24px;
+    border-radius:30px;
+    font-size:15px;
+    font-weight:600;
+    cursor:pointer;
+    text-decoration:none;
+    transition:all .3s
+}
+.filter-btn:hover,.filter-btn.active {
+    background:#3498db;
+    color:#fff;
+    border-color:#3498db;
+    transform:translateY(-2px);
+    box-shadow:0 8px 25px rgba(52,152,219,.25)
+}
+.portfolio-grid {
+    position:relative;
+    width:100%;
+    height:620px;
+    margin:50px auto 30px;
+    padding:70px 0;
+    display:flex;
+    align-items:center;
+    overflow:hidden;
+    perspective:1600px;
+    perspective-origin:center;
+    background:radial-gradient(circle at center,rgba(52,152,219,.12) 0%,transparent 48%)
+}
+.portfolio-grid {
+    touch-action:pan-y;
+    user-select:none;
+    -webkit-user-select:none;
+    -webkit-tap-highlight-color:transparent
+}
+.portfolio-grid:before,.portfolio-grid:after {
+    content:"";
+    position:absolute;
+    top:0;
+    bottom:0;
+    width:180px;
+    z-index:20;
+    pointer-events:none
+}
+.portfolio-grid:before {
+    left:0;
+    background:linear-gradient(to right,#050505,transparent)
+}
+.portfolio-grid:after {
+    right:0;
+    background:linear-gradient(to left,#050505,transparent)
+}
+.portfolio-track {
+    display:flex;
+    align-items:center;
+    gap:28px;
+    width:max-content;
+    height:100%;
+    position:relative;
+    transform-style:preserve-3d;
+    will-change:transform;
+    padding:0 20px
+}
+.portfolio-item {
+    flex:0 0 280px;
+    width:280px;
+    height:500px;
+    position:relative;
+    border-radius:26px;
+    overflow:hidden;
+    background:#111;
+    border:1px solid rgba(255,255,255,.12);
+    box-shadow:0 25px 60px rgba(0,0,0,.65),0 0 30px rgba(52,152,219,.08);
+    transform-style:preserve-3d;
+    transition:transform .25s ease,box-shadow .25s ease,opacity .25s ease;
+    will-change:transform
+}
+.portfolio-img-container {
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+    background:#080808
+}
+.portfolio-img {
+    width:100%;
+    height:100%;
+    display:block;
+    object-fit:cover;
+    background:#111;
+    cursor:pointer;
+    transition:transform .5s
+}
+.portfolio-video {
+    width:100%;
+    height:100%;
+    display:block;
+    object-fit:cover;
+    background:#000;
+    cursor:pointer
+}
+.portfolio-item:after {
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(to bottom,rgba(0,0,0,.02) 30%,rgba(0,0,0,.88) 100%);
+    pointer-events:none;
+    z-index:2
+}
+.portfolio-item:hover {
+    box-shadow:0 35px 80px rgba(0,0,0,.85),0 0 40px rgba(52,152,219,.28)
+}
+.portfolio-item:hover .portfolio-img {
+    transform:scale(1.05)
+}
+.portfolio-content {
+    position:absolute;
+    left:0;
+    right:0;
+    bottom:0;
+    z-index:5;
+    padding:22px;
+    text-align:left;
+    background:linear-gradient(to top,rgba(0,0,0,.95),transparent)
+}
+.portfolio-content h3 {
+    color:#fff;
+    font-size:1.15rem;
+    margin-bottom:7px
+}
+.portfolio-content p {
+    color:rgba(255,255,255,.75);
+    font-size:.82rem;
+    line-height:1.45;
+    display:-webkit-box;
+    -webkit-line-clamp:2;
+    -webkit-box-orient:vertical;
+    overflow:hidden;
+    margin-bottom:10px
+}
+.portfolio-category {
+    display:inline-block;
+    padding:5px 12px;
+    border-radius:20px;
+    background:rgba(52,152,219,.18);
+    border:1px solid rgba(52,152,219,.55);
+    color:#3498db;
+    font-size:.75rem;
+    font-weight:600
+}
+.pagination {
+    display:flex;
+    justify-content:center;
+    margin-top:30px;
+    padding-bottom:10px
+}
+.pagination-list {
+    display:flex;
+    list-style:none;
+    gap:10px
+}
+.pagination-item {
+    width:40px;
+    height:40px;
+    display:flex;
+    align-items:center;
+    justify-content:center
+}
+.pagination-link {
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    width:100%;
+    height:100%;
+    border-radius:50%;
+    background:rgba(255,255,255,.08);
+    color:#fff;
+    text-decoration:none;
+    font-weight:500;
+    border:1px solid rgba(255,255,255,.16);
+    transition:all .3s
+}
+.pagination-link:hover,.pagination-link.active {
+    background:var(--primary);
+    color:#fff;
+    border-color:var(--primary)
+}
+.lightbox {
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.97);
+    z-index:2000;
+    align-items:center;
+    justify-content:center;
+    padding:20px
+}
+.lightbox.active {
+    display:flex
+}
+.lightbox-content {
+    position:relative;
+    max-width:90%;
+    max-height:90vh;
+    text-align:center
+}
+.lightbox-img,.lightbox-video {
+    max-width:100%;
+    max-height:80vh;
+    border-radius:8px;
+    box-shadow:0 0 30px rgba(0,0,0,.7)
+}
+.lightbox-video {
+    display:none;
+    background:#000;
+    width:min(100%,1100px)
+}
+.lightbox-close {
+    position:absolute;
+    top:-50px;
+    right:-15px;
+    color:#fff;
+    font-size:35px;
+    cursor:pointer;
+    background:rgba(0,0,0,.6);
+    border-radius:50%;
+    width:50px;
+    height:50px;
+    display:flex;
+    align-items:center;
+    justify-content:center
+}
+.lightbox-close:hover {
+    color:var(--primary);
+    background:rgba(0,0,0,.9)
+}
+.lightbox-caption {
+    color:#fff;
+    text-align:center;
+    margin-top:25px;
+    padding:0 30px;
+    max-width:800px
+}
+.lightbox-caption h3 {
+    font-size:1.8rem;
+    margin-bottom:10px
+}
+.lightbox-caption p {
+    font-size:1.1rem;
+    opacity:.9;
+    line-height:1.7
+}
+.footer {
+    background:var(--dark);
+    color:rgba(255,255,255,.85);
+    padding:40px 0;
+    text-align:center
+}
+.copyright {
+    font-size:1rem
+}
+@media(max-width:768px) {
+    .portfolio-grid {
+        height:540px;
+        padding:50px 0
+    }
+    .portfolio-item {
+        flex-basis:240px;
+        width:240px;
+        height:430px
+    }
+    .portfolio-track {
+        gap:20px
+    }
+    .portfolio-grid:before,.portfolio-grid:after {
+        width:80px
+    }
+    .section-title {
+        font-size:2rem
+    }
+    .nav-container {
+        flex-direction:column;
+        padding:15px 0
+    }
+    .nav-links {
+        margin-top:15px;
+        width:100%;
+        justify-content:space-around
+    }
+    .nav-links li {
+        margin-left:0
+    }
+}
+@media(max-width:576px) {
+    .portfolio-grid {
+        height:500px
+    }
+    .portfolio-item {
+        flex-basis:220px;
+        width:220px;
+        height:400px
+    }
+    .portfolio-content {
+        padding:18px
+    }
+    .portfolio-content h3 {
+        font-size:1rem
+    }
+    .portfolio-content p {
+        font-size:.76rem
+    }
+    .section-title {
+        font-size:1.8rem
+    }
+    .lightbox-caption h3 {
+        font-size:1.4rem
+    }
+    .lightbox-caption p {
+        font-size:1rem
+    }
+    .pagination-item {
+        width:35px;
+        height:35px
+    }
+}
+  </style>
+ </head>
+ <body>
+  <nav class="navbar">
+   <div class="nav-container">
+    <div class="logo">
+     <a href="index.html">
+      Kashif Imran
+     </a>
+    </div>
+    <ul class="nav-links">
+     <li>
+      <a href="index.html">
+       Home
+      </a>
+     </li>
+     <li>
+      <a href="portfolio.html">
+       Portfolio
+      </a>
+     </li>
+     <li>
+      <a href="certificates.html">
+       Certificates
+      </a>
+     </li>
+     <li>
+      <a href="about.html">
+       About
+      </a>
+     </li>
+     <li>
+      <a href="contact.html">
+       Contact
+      </a>
+     </li>
+    </ul>
+   </div>
+  </nav>
+  <section class="portfolio-section">
+   <div class="container">
+    <h2 class="section-title">
+     Display Center
+    </h2>
+    <p class="subtitle">
+     <strong>
+      A selection of featured projects showcasing my creativity, technical expertise, and professional experience
+      <br/>
+      across Graphic Design, 2D Architecture, 3D Modeling, and Video Editing & Animation.
+     </strong>
+    </p>
+    <div class="filter-buttons">
+     <a class="filter-btn" href="graphics.html">
+      🎨 Graphic Design
+     </a>
+     <a class="filter-btn" href="3D Work.html">
+      🧊 3D Modeling
+     </a>
+     <a class="filter-btn" href="architecture.html">
+      🏗️ Architecture Design
+     </a>
+     <a class="filter-btn" href="video.html">
+      🎬 Video Editing / Animations
+     </a>
+    </div>
+    <div class="portfolio-grid">
+     <div class="portfolio-track">
+     </div>
+    </div>
+    <div class="pagination">
+     <ul class="pagination-list">
+     </ul>
+    </div>
+   </div>
+  </section>
+  <div class="lightbox" id="lightbox">
+   <div class="lightbox-content">
+    <span aria-label="Close lightbox" class="lightbox-close">
+     ×
+    </span>
+    <img alt="" class="lightbox-img" src=""/>
+    <video class="lightbox-video" controls="" playsinline="">
+    </video>
+    <div class="lightbox-caption">
+     <h3 class="caption-title">
+     </h3>
+     <p class="caption-desc">
+     </p>
+    </div>
+   </div>
+  </div>
+  <footer class="footer">
+   <div class="container">
+    <div class="copyright">
+     <p>
+      ©
+      <span id="year">
+      </span>
+      Kashif Imran. All Rights Reserved.
+     </p>
+    </div>
+   </div>
+  </footer>
+  <script>
+// ============================================================
+// PORTFOLIO DATA
+// ============================================================
 
+const portfolioItems = [
+
+            // Page 1
+            {
+                imgSrc: "Image/Project_1.png",
+                alt: "Pringle City Center Stand",
+                title: "Pringles Display Stand (3 Shelves)",
+                desc: "Bold red-and-gold stand with glitter accents and three spacious shelves. Designed to attract attention and showcase Pringles in high-traffic retail areas with strong visual impact.",
+                category: "3D Modeling"
+            },
+            {
+                imgSrc: "Image/Project_2.png",
+                alt: "Pringle City Center Stand",
+                title: "Double-Bay Pringles Display Stand (6 Shelves)",
+                desc: "A bold, gold-accented 3D display with two bays and six spacious shelves. Designed for maximum product exposure and visual appeal, perfect for retail promotions and high-footfall areas.",
+                category: "3D Modeling"
+            },
+            {
+                imgSrc: "Image/Project_3.png",
+                alt: "Pringle City Center Stand",
+                title: "Large-Format Pringles Display Stand (12 Shelves)",
+                desc: "A high-capacity 3D display stand with 12 shelves across four bays. Designed with vibrant Pringles branding and gold accents, it's perfect for maximizing product visibility in busy retail environments.",
+                category: "3D Modeling"
+            },
+            {
+                imgSrc: "Image/Project_4.png",
+                alt: "Kellogg's Nuttybar City Center Stand",
+                title: "Kellogg's Nuttybar Stand",
+                desc: "A bold, nutty-themed display designed for city centers, featuring eye-catching 3D elements and vibrant branding to attract customers. Perfect for promotions and tastings!",
+                category: "3D Modeling"
+            },
+            {
+                imgSrc: "Image/Project_6.png",
+                alt: "bahlsen Products shalves",
+                title: "bahlsen stand",
+                desc: "A compact, illuminated 3D display with LED lightbox panels and a center demo shelf—perfect for high-traffic promotions. Eye-catching, durable, and brand-boosting!",
+                category: "3D Modeling"
+            },
+            {
+                imgSrc: "Image/Project_6a.png",
+                alt: "Bahlsen Display Stand Design – Al Khawaneej Mall",
+                title: "Bahlsen Display Stand Design – Al Khawaneej Mall",
+                desc: "This Bahlsen display stand was designed in Adobe Illustrator for Al Khawaneej Mall.						It features bold branding, bilingual shelf strips, and clear product messaging.							The layout uses vibrant colors to maximize visibility and shelf impact.",
+                category: "2D Illustrating"
+            },
+            {
+                imgSrc: "Image/Project_7.png",
+                alt: "Pringle City Center Stand",
+                title: "Pringle City Center Stand",
+                desc: "This Pringles chip stand was designed for promotional retail display.It features vibrant graphics, bold branding, and a sports theme to attract attention.Perfect for stacking chip cans while reinforcing the campaign message visually.",
+                category: "3D Modeling"
+            },
+            {
+                imgSrc: "Image/Project_8.png",
+                alt: "Al Tayer Expo stand",
+                title: "Al Tayer Expo stand",
+                desc: "This modern 3D expo stand was designed to showcase a stylish, welcoming brand presence.It features a clean architectural layout with a reception, seating areas, and product zones.The vibrant color palette and open structure enhance visibility and visitor flow.",
+                category: "Exhibition Design"
+            },
+            {
+                imgSrc: "Image/Project_9.png",
+                alt: "Al Areesh Exhibition Stand",
+                title: "Al Areesh Exhibition Stand",
+                desc: "Designed and modeled in 3ds Max with detailed technical drawings created in AutoCAD.The stand features clean branding, product-focused visuals, and a functional layout for client interaction.",
+                category: "Stage Design"
+            },
+            {
+                imgSrc: "Image/Project_9a.png",
+                alt: "Al Areesh Exhibition Stand",
+                title: "Al Areesh Exhibition Stand",
+                desc: "Side view",
+                category: "Retail Design"
+            },
+            {
+                imgSrc: "Image/Project_10.png",
+                alt: "Concept Store",
+                title: "Concept Store",
+                desc: "Innovative retail concept store blending physical and digital shopping experiences.",
+                category: "Retail Design"
+            },
+            {
+                imgSrc: "Image/Project_11.png",
+                alt: "Office Design 1",
+                title: "Modern Office Space",
+                desc: "Contemporary office design with ergonomic furniture and open spaces.",
+                category: "Interior Design"
+            },
+            {
+                imgSrc: "Image/Project_19.png",
+                alt: "Office Design 2",
+                title: "Co-Working Space",
+                desc: "Modern co-working space with flexible work areas.",
+                category: "Interior Design"
+            },
+            {
+                imgSrc: "Image/Project_20.png",
+                alt: "Brand Identity 2",
+                title: "Startup Branding",
+                desc: "Complete visual identity for a tech startup.",
+                category: "Brand Identity"
+            },
+            {
+                imgSrc: "Image/Project_21.png",
+                alt: "Packaging Design 3",
+                title: "Luxury Gift Box",
+                desc: "Premium packaging for high-end jewelry brand.",
+                category: "Packaging Design"
+            },
+            {
+                imgSrc: "Image/Project_22.png",
+                alt: "Retail Store 2",
+                title: "Boutique Store Design",
+                desc: "Chic boutique store layout with custom displays.",
+                category: "Retail Design"
+            },
+            {
+                imgSrc: "Image/Project_24.png",
+                alt: "Restaurant Branding",
+                title: "Gourmet Restaurant Identity",
+                desc: "Complete branding package for a high-end restaurant including logo and menus.",
+                category: "Branding"
+            },
+            {
+                imgSrc: "Image/Project_26.png",
+                alt: "Product Catalog",
+                title: "Fashion Catalog Design",
+                desc: "Minimalist fashion product catalog with clean typography.",
+                category: "Graphic Design"
+            },
+            {
+                imgSrc: "Image/Project_34.png",
+                alt: "Office Design 1",
+                title: "Modern Office Space",
+                desc: "Contemporary office design with ergonomic furniture and open spaces.",
+                category: "Interior Design"
+            },           
+            {
+                imgSrc: "Image/Project_43.png",
+                alt: "Brand Identity 2",
+                title: "Startup Branding",
+                desc: "Complete visual identity for a tech startup.",
+                category: "Brand Identity"
+            },
+            {
+                imgSrc: "Image/Project_44.png",
+                alt: "Packaging Design 3",
+                title: "Luxury Gift Box",
+                desc: "Premium packaging for high-end jewelry brand.",
+                category: "Packaging Design"
+            },
+            {
+                imgSrc: "Image/Project_46.png",
+                alt: "Office Design 1",
+                title: "Modern Office Space",
+                desc: "Contemporary office design with ergonomic furniture and open spaces.",
+                category: "Interior Design"
+            },
+            {
+                imgSrc: "Image/Project_47.png",
+                alt: "Restaurant Branding",
+                title: "Gourmet Restaurant Identity",
+                desc: "Complete branding package for a high-end restaurant including logo and menus.",
+                category: "Branding"
+            },
+            {
+                imgSrc: "Image/Project_48.png",
+                alt: "Hotel Lobby",
+                title: "Luxury Hotel Lobby",
+                desc: "Elegant hotel lobby design with premium materials and lighting.",
+                category: "Interior Design"
+            },
+            {
+                imgSrc: "Image/Project_49.png",
+                alt: "Product Catalog",
+                title: "Fashion Catalog Design",
+                desc: "Minimalist fashion product catalog with clean typography.",
+                category: "Graphic Design"
+            },
+            {
+                imgSrc: "Image/Project_50.png",
+                alt: "Exhibition Stand 2",
+                title: "Tech Expo Stand",
+                desc: "Futuristic exhibition stand for a technology conference.",
+                category: "3D Design"
+            },
+            {
+                imgSrc: "Image/Project_51.png",
+                alt: "Packaging Design 2",
+                title: "Eco-Friendly Packaging",
+                desc: "Sustainable packaging solution using recycled materials.",
+                category: "Product Design"
+            },
+            {
+                imgSrc: "Image/Project_52.png",
+                alt: "Retail Display 2",
+                title: "Cosmetics Display",
+                desc: "Elegant cosmetics counter display with integrated lighting.",
+                category: "Retail Design"
+            },
+            {
+                imgSrc: "Image/Project_53.png",
+                alt: "Trade Show 2",
+                title: "Automotive Exhibition",
+                desc: "Dynamic exhibition stand for an automotive brand.",
+                category: "Exhibition Design"
+            },
+            {
+                imgSrc: "Image/Project_54.png",
+                alt: "Office Design 2",
+                title: "Co-Working Space",
+                desc: "Modern co-working space with flexible work areas.",
+                category: "Interior Design"
+            },
+            {
+                imgSrc: "Image/Project_55.png",
+                alt: "Brand Identity 2",
+                title: "Startup Branding",
+                desc: "Complete visual identity for a tech startup.",
+                category: "Brand Identity"
+            },
+            {
+                imgSrc: "Image/Project_56.png",
+                alt: "Packaging Design 3",
+                title: "Luxury Gift Box",
+                desc: "Premium packaging for high-end jewelry brand.",
+                category: "Packaging Design"
+            },
+            {
+                imgSrc: "Image/Project_57.png",
+                alt: "Retail Store 2",
+                title: "Boutique Store Design",
+                desc: "Chic boutique store layout with custom displays.",
+                category: "Retail Design"
+            }
+        ];
+
+
+        // Page 3-6 would continue with similar items...
+
+// ============================================================
+// CAROUSEL SETTINGS
+// ============================================================
+
+const itemsPerPage = 20;
+let currentPage = 1;
+let portfolioAnimationFrame = null;
+let portfolioCarouselX = 0;
+let portfolioLastTime = 0;
+let portfolioPaused = false;
+
+// ============================================================
+// HELPER
+// ============================================================
+
+function escapeHTML(value) {
+    const div = document.createElement('div');
+    div.textContent = value == null ? '' : String(value);
+    return div.innerHTML;
+}
+
+// ============================================================
+// INITIALIZATION
+// ============================================================
+
+document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('year').textContent = new Date().getFullYear();
+    displayPortfolioItems(currentPage);
+    setupPagination();
+    setupLightbox();
+});
+
+// ============================================================
+// BUILD CAROUSEL CARDS
+// ============================================================
+
+function displayPortfolioItems(page) {
+    const track=document.querySelector('.portfolio-track');
+    if (!track) return;
+    if (portfolioAnimationFrame) {
+        cancelAnimationFrame(portfolioAnimationFrame);
+    }
+    track.innerHTML='';
+
+    const start=(page-1)*itemsPerPage;
+    const items=portfolioItems.slice(start,start+itemsPerPage);
+
+    // Duplicate the current page so the carousel can loop continuously.
+    [...items,...items].forEach((item,index)=>{
+        const card=document.createElement('article');
+        card.className='portfolio-item';
+        card.dataset.index=index;
+        card.dataset.type=item.videoSrc?'video':'image';
+        card.innerHTML=`
+            <div class="portfolio-img-container">
+                ${item.videoSrc
+                    ? `<video class="portfolio-video" autoplay muted loop playsinline controls preload="metadata">
+                           <source src="${escapeHTML(item.videoSrc)}" type="video/mp4">
+                       </video>`
+                    : `<img src="${escapeHTML(item.imgSrc||'')}" alt="${escapeHTML(item.alt||'')}" class="portfolio-img"
+                           data-title="${escapeHTML(item.title||'')}" data-desc="${escapeHTML(item.desc||'')}" loading="lazy">`
+                }
+            </div>
+            <div class="portfolio-content">
+                <h3>${escapeHTML(item.title||'')}</h3>
+                <p>${escapeHTML(item.desc||'')}</p>
+                <span class="portfolio-category">${escapeHTML(item.category||'')}</span>
+            </div>`;
+        track.appendChild(card);
+    });
+
+    startPortfolioCarousel();
+}
+
+
+
+// ============================================================
+// CAROUSEL ENGINE
+// ============================================================
+
+function startPortfolioCarousel() {
+    const grid=document.querySelector('.portfolio-grid');
+    const track=document.querySelector('.portfolio-track');
+    if (!grid || !track) return;
+
+    portfolioCarouselX=0;
+    portfolioLastTime=performance.now();
+    portfolioPaused=false;
+
+    const state={touching:false,startX:0,lastX:0,dragDistance:0,swiped:false};
+
+    function updateCards(){
+        const gr=grid.getBoundingClientRect();
+        const cx=gr.left+gr.width/2;
+        const cards=track.querySelectorAll('.portfolio-item');
+
+        cards.forEach(card=>{
+            const r=card.getBoundingClientRect();
+            const distance=r.left+r.width/2-cx;
+            const n=Math.max(-1,Math.min(1,distance/500));
+            const a=Math.abs(n);
+            const scale=1.08-a*.30;
+            const rotateY=n*-38;
+            const z=(1-a)*80;
+
+            card.style.transform=`translateZ(${z}px) rotateY(${rotateY}deg) scale(${scale})`;
+            card.style.opacity=Math.max(.55,1-a*.35);
+            card.style.zIndex=a<.18?'10':'1';
+            card.style.boxShadow=a<.18
+                ?'0 35px 80px rgba(0,0,0,.85),0 0 40px rgba(52,152,219,.35)'
+                :'0 25px 60px rgba(0,0,0,.65),0 0 20px rgba(52,152,219,.08)';
+        });
+
+        const first=cards[0];
+        if(first && first.getBoundingClientRect().right < gr.left-120){
+            const gap=parseFloat(getComputedStyle(track).gap)||28;
+            portfolioCarouselX += first.offsetWidth+gap;
+            track.style.transform=`translate3d(${portfolioCarouselX}px,0,0)`;
+            track.appendChild(first);
+        }
+    }
+
+    function animate(t){
+        if(!portfolioPaused && !state.touching){
+            const delta=Math.min(t-portfolioLastTime,50);
+            portfolioCarouselX-=delta*.035;
+        }
+        portfolioLastTime=t;
+        track.style.transform=`translate3d(${portfolioCarouselX}px,0,0)`;
+        updateCards();
+        portfolioAnimationFrame=requestAnimationFrame(animate);
+    }
+
+    if (portfolioAnimationFrame) {
+        cancelAnimationFrame(portfolioAnimationFrame);
+    }
+    portfolioAnimationFrame=requestAnimationFrame(animate);
+
+    grid.onmouseenter=()=>{ if(!state.touching)portfolioPaused=true; };
+    grid.onmouseleave=()=>{ if(!state.touching){portfolioPaused=false;portfolioLastTime=performance.now();} };
+
+    // Real mobile swipe / drag support.
+    grid.ontouchstart=(e)=>{
+        if(!e.touches.length)return;
+        state.touching=true;
+        state.startX=e.touches[0].clientX;
+        state.lastX=state.startX;
+        state.dragDistance=0;
+        state.swiped=false;
+        portfolioPaused=true;
+    };
+
+    grid.ontouchmove=(e)=>{
+        if(!state.touching||!e.touches.length)return;
+        const x=e.touches[0].clientX;
+        const dx=x-state.lastX;
+        state.lastX=x;
+        state.dragDistance=x-state.startX;
+        if(Math.abs(state.dragDistance)>8)state.swiped=true;
+        portfolioCarouselX += dx;
+        track.style.transform=`translate3d(${portfolioCarouselX}px,0,0)`;
+        updateCards();
+        if(Math.abs(dx)>0)e.preventDefault();
+    };
+
+    grid.ontouchend=()=>{
+        if(!state.touching)return;
+        state.touching=false;
+        // A short swipe gets a small momentum kick.
+        if(Math.abs(state.dragDistance)>35){
+            portfolioCarouselX += state.dragDistance>0 ? 55 : -55;
+        }
+        portfolioPaused=false;
+        portfolioLastTime=performance.now();
+        setTimeout(()=>{state.swiped=false;},80);
+    };
+
+    grid.ontouchcancel=()=>{
+        state.touching=false;
+        portfolioPaused=false;
+        portfolioLastTime=performance.now();
+    };
+
+    // Prevent opening the lightbox when a card was swiped.
+    grid.addEventListener('click',(e)=>{
+        if(state.swiped)e.preventDefault();
+    },true);
+}
+
+
+
+// ============================================================
+// PAGINATION
+// ============================================================
+
+function setupPagination() {
+    const list=document.querySelector('.pagination-list');
+    const total=Math.ceil(portfolioItems.length/itemsPerPage);
+    if (!list) return;
+    list.innerHTML='';
+
+    if(currentPage>1)list.appendChild(createPaginationItem('prev',currentPage-1,'<i class="fas fa-chevron-left"></i>'));
+    for(let i=1;i<=total;i++)list.appendChild(createPaginationItem('page',i,i));
+    if(currentPage<total)list.appendChild(createPaginationItem('next',currentPage+1,'<i class="fas fa-chevron-right"></i>'));
+
+    list.querySelectorAll('.pagination-link').forEach(link=>{
+        link.addEventListener('click',(e)=>{
+            e.preventDefault();
+            currentPage=parseInt(link.dataset.page,10);
+            displayPortfolioItems(currentPage);
+            setupPagination();
+            window.scrollTo({top:0,behavior:'smooth'});
+        });
+    });
+}
+
+
+
+// ============================================================
+// PAGINATION ITEM
+// ============================================================
+
+function createPaginationItem(type,page,content) {
+    const li=document.createElement('li');
+    li.className='pagination-item';
+    li.innerHTML=`<a href="#" class="pagination-link ${type==='page'&&page===currentPage?'active':''}" data-page="${page}">${content}</a>`;
+    return li;
+}
+
+
+
+// ============================================================
+// LIGHTBOX
+// ============================================================
+
+function setupLightbox() {
+    const lightbox=document.getElementById('lightbox');
+    const img=lightbox.querySelector('.lightbox-img');
+    const video=lightbox.querySelector('.lightbox-video');
+    const title=lightbox.querySelector('.caption-title');
+    const desc=lightbox.querySelector('.caption-desc');
+
+    function close(){
+        lightbox.classList.remove('active');
+        img.src='';
+        video.pause();
+        video.removeAttribute('src');
+        video.innerHTML='';
+        img.style.display='none';
+        video.style.display='none';
+        document.body.style.overflow='';
+    }
+
+    document.addEventListener('click',(e)=>{
+        const image=e.target.closest('.portfolio-img');
+        const videoCard=e.target.closest('.portfolio-video');
+        if(!image && !videoCard)return;
+
+        // Let native video controls work normally.
+        if(videoCard && e.target.tagName.toLowerCase()==='video')return;
+
+        lightbox.classList.add('active');
+        title.textContent=image ? (image.dataset.title||'') : (videoCard.closest('.portfolio-item')?.querySelector('h3')?.textContent||'');
+        desc.textContent=image ? (image.dataset.desc||'') : (videoCard.closest('.portfolio-item')?.querySelector('p')?.textContent||'');
+
+        if(image){
+            video.pause();
+            video.removeAttribute('src');
+            video.innerHTML='';
+            video.style.display='none';
+            img.src=image.src;
+            img.alt=image.alt||'';
+            img.style.display='block';
+        }else{
+            img.src='';
+            img.style.display='none';
+            video.innerHTML=`<source src="${escapeHTML(videoCard.querySelector('source')?.src||videoCard.currentSrc||'')}" type="video/mp4">`;
+            video.style.display='block';
+            video.load();
+            video.play().catch(()=>{});
+        }
+        document.body.style.overflow='hidden';
+    });
+
+    lightbox.querySelector('.lightbox-close').addEventListener('click',close);
+    lightbox.addEventListener('click',(e)=>{if(e.target===lightbox)close();});
+    document.addEventListener('keydown',(e)=>{if(e.key==='Escape'&&lightbox.classList.contains('active'))close();});
+}
+</script>
+ </body>
+</html>
