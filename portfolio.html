@@ -811,9 +811,6 @@ const portfolioItems = [
             }
         ];
 
-
-        // Page 3-6 would continue with similar items...
-
 // ============================================================
 // CAROUSEL SETTINGS
 // ============================================================
@@ -1022,7 +1019,7 @@ function setupPagination() {
     list.querySelectorAll('.pagination-link').forEach(link=>{
         link.addEventListener('click',(e)=>{
             e.preventDefault();
-            currentPage=parseInt(link.dataset.page,10);
+            currentPage=parseInt(link.dataset.page,1);
             displayPortfolioItems(currentPage);
             setupPagination();
             window.scrollTo({top:0,behavior:'smooth'});
