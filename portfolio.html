@@ -811,11 +811,14 @@ const portfolioItems = [
             }
         ];
 
+
+        // Page 3-6 would continue with similar items...
+
 // ============================================================
 // CAROUSEL SETTINGS
 // ============================================================
 
-const itemsPerPage = 1;
+const itemsPerPage = 20;
 let currentPage = 1;
 let portfolioAnimationFrame = null;
 let portfolioCarouselX = 0;
@@ -1019,7 +1022,7 @@ function setupPagination() {
     list.querySelectorAll('.pagination-link').forEach(link=>{
         link.addEventListener('click',(e)=>{
             e.preventDefault();
-            currentPage=parseInt(link.dataset.page,1);
+            currentPage=parseInt(link.dataset.page,10);
             displayPortfolioItems(currentPage);
             setupPagination();
             window.scrollTo({top:0,behavior:'smooth'});
